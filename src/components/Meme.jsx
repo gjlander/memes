@@ -9,7 +9,7 @@ export default function Meme({ setMemes, memes, memeIndex, form }) {
                 const memes = await axios.get(
                     "https://api.imgflip.com/get_memes"
                 );
-                console.log(memes.data.data.memes[0].url);
+                console.log(memes.data.data.memes);
                 setMemes(memes.data.data.memes);
             } catch (error) {
                 console.error(error);
