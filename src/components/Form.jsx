@@ -6,6 +6,8 @@ export default function BasicTextFields({
     memeIndex,
     setMemeIndex,
     memes,
+    savedMemes,
+    setSavedMemes,
 }) {
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -26,6 +28,24 @@ export default function BasicTextFields({
 
     const handleRandomClick = () => {
         setMemeIndex(Math.floor(Math.random() * memes.length));
+    };
+
+    const handleSaveMeme = () => {
+        // e.preventDefault();
+        const newMemes = [
+            ...savedMemes,
+            {
+                id: crypto.randomUUID(),
+                topText: form.topText,
+                bottomText: form.bottomText,
+                url: memes[memeIndex].url,
+            },
+        ];
+        setSavedMemes(newMemes);
+        setForm({
+            topText: "",
+            bottomText: "",
+        });
     };
 
     return (
@@ -84,9 +104,18 @@ export default function BasicTextFields({
                     Next
                 </Button>
             </Stack>
-            <Typography variant="p">
-                Meme {memeIndex + 1} of {memes.length}
-            </Typography>
+            <Button
+                onClick={handleSaveMeme}
+                variant="contained"
+                color="success"
+            >
+                Save Meme
+            </Button>
+            {memes && (
+                <Typography variant="p">
+                    Meme {memeIndex + 1} of {memes.length}
+                </Typography>
+            )}
         </Box>
     );
 }

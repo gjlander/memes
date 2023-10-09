@@ -20,6 +20,7 @@ export default function Meme({ setMemes, memes, memeIndex, form }) {
 
     return (
         <Card
+            id="newMeme"
             sx={{
                 width: 400,
                 height: 400,
